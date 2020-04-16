@@ -19,13 +19,14 @@ plugins: [
   new CleanWebpackPlugin(),
   new Dotenv(),
   new HtmlWebpackPlugin({
-    title: 'Ping Pong',
+    title: '',
     template: './src/index.html',
     inject: 'body'
   })
 ],
 module: {
   rules: [
+    //for adding css to project -->
     {
       test: /\.css$/,
       use: [
@@ -33,6 +34,7 @@ module: {
         'css-loader'
       ]
     },
+    //for adding jquery to project-->
     {
       test: /\.js$/,
       exclude: [
@@ -40,6 +42,26 @@ module: {
           /spec/
         ],
       loader: "eslint-loader"
+    },
+    //for saving images to a project-->
+    {
+      test: /\.(gif|png|jpe?g)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'assets/images/'
+          }
+        }
+      ]
+    },
+    
+    {
+      test:/\.html$/,
+      use: [
+        'html-loader'
+      ]
     }
   ]
 }
